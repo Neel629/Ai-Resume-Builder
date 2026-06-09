@@ -44,7 +44,7 @@ export default function Footer() {
           {/* Copyright */}
           <p className="text-sm text-muted-foreground flex items-center gap-1">
             Made with <Heart className="h-3 w-3 text-emerald fill-emerald" /> by
-            ResumeForge
+            Neel Prajapati
           </p>
         </div>
       </div>
