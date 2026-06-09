@@ -1,79 +1,53 @@
-export async function exportToPDF(elementId: string, filename: string) {
-  // Dynamic import to avoid SSR issues
-  const html2pdf = (await import("html2pdf.js")).default;
+import { toPng } from "html-to-image";
+import { jsPDF } from "jspdf";
 
+async function generatePDF(elementId: string, isBase64: boolean, filename?: string): Promise<string> {
   const element = document.getElementById(elementId);
   if (!element) {
     throw new Error(`Element with id "${elementId}" not found`);
   }
 
-  const opt = {
-    margin: 0,
-    filename: `${filename.replace(/[^a-zA-Z0-9]/g, "_")}_resume.pdf`,
-    image: { type: "jpeg" as const, quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      letterRendering: true,
-      logging: false,
-      windowWidth: 794,
-      onclone: (clonedDoc: Document) => {
-        const el = clonedDoc.getElementById(elementId);
-        if (el) {
-          el.style.width = "794px";
-          el.style.minHeight = "1123px";
-          el.style.transform = "none";
-          el.classList.remove("shadow-2xl", "shadow-black/10", "rounded-lg", "overflow-hidden");
-        }
-      }
+  // We use html-to-image because it uses the browser's native SVG foreignObject 
+  // rendering. This natively supports all modern CSS features (like Tailwind v4's 
+  // oklab/oklch colors) without crashing, unlike html2canvas.
+  const dataUrl = await toPng(element, {
+    quality: isBase64 ? 0.85 : 0.98,
+    pixelRatio: isBase64 ? 1.5 : 2,
+    style: {
+      transform: "none",
+      width: "794px",
+      minHeight: "1123px",
+      boxShadow: "none",
+      borderRadius: "0",
+      overflow: "visible",
     },
-    jsPDF: {
-      unit: "mm" as const,
-      format: "a4" as const,
-      orientation: "portrait" as const,
-    },
-  };
+  });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await html2pdf().set(opt as any).from(element).save();
+  const pdf = new jsPDF({
+    unit: "mm",
+    format: "a4",
+    orientation: "portrait",
+  });
+
+  const pdfWidth = pdf.internal.pageSize.getWidth(); // 210mm
+  const pdfHeight = pdf.internal.pageSize.getHeight(); // 297mm
+
+  pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+  if (isBase64) {
+    // Return data URI string for backend emailing (kept small to avoid Vercel 4.5MB limit)
+    return pdf.output("datauristring");
+  } else {
+    // Trigger download prompt in browser
+    pdf.save(`${(filename || "resume").replace(/[^a-zA-Z0-9]/g, "_")}_resume.pdf`);
+    return "";
+  }
+}
+
+export async function exportToPDF(elementId: string, filename: string) {
+  await generatePDF(elementId, false, filename);
 }
 
 export async function exportToPDFBase64(elementId: string): Promise<string> {
-  // Dynamic import to avoid SSR issues
-  const html2pdf = (await import("html2pdf.js")).default;
-
-  const element = document.getElementById(elementId);
-  if (!element) {
-    throw new Error(`Element with id "${elementId}" not found`);
-  }
-
-  const opt = {
-    margin: 0,
-    image: { type: "jpeg" as const, quality: 0.85 },
-    html2canvas: {
-      scale: 1.5,
-      useCORS: true,
-      letterRendering: true,
-      logging: false,
-      windowWidth: 794,
-      onclone: (clonedDoc: Document) => {
-        const el = clonedDoc.getElementById(elementId);
-        if (el) {
-          el.style.width = "794px";
-          el.style.minHeight = "1123px";
-          el.style.transform = "none";
-          el.classList.remove("shadow-2xl", "shadow-black/10", "rounded-lg", "overflow-hidden");
-        }
-      }
-    },
-    jsPDF: {
-      unit: "mm" as const,
-      format: "a4" as const,
-      orientation: "portrait" as const,
-    },
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const pdfString = await html2pdf().set(opt as any).from(element).output('datauristring');
-  return pdfString as string;
+  return await generatePDF(elementId, true);
 }
