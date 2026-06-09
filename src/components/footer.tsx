@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Tagline */}
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald text-white">
-              <FileText className="h-4 w-4" />
+            <div className="flex h-8 w-8 items-center justify-center">
+              <img src="/logo.png" alt="Resume Forge Logo" className="h-full w-full object-contain" />
             </div>
             <span className="text-lg font-heading font-semibold tracking-tight">
               Resume<span className="text-emerald">Forge</span>

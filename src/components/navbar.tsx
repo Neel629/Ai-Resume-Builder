@@ -60,8 +60,8 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald text-white transition-transform group-hover:scale-105">
-              <FileText className="h-4 w-4" />
+            <div className="flex h-10 w-10 items-center justify-center transition-transform group-hover:scale-105">
+              <img src="/logo.png" alt="Resume Forge Logo" className="h-full w-full object-contain" />
             </div>
             <span className="text-lg font-heading font-semibold tracking-tight text-foreground">
               Resume<span className="text-emerald">Forge</span>
