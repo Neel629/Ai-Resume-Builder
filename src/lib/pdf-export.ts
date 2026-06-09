@@ -49,9 +49,9 @@ export async function exportToPDFBase64(elementId: string): Promise<string> {
 
   const opt = {
     margin: 0,
-    image: { type: "jpeg" as const, quality: 0.98 },
+    image: { type: "jpeg" as const, quality: 0.85 },
     html2canvas: {
-      scale: 2,
+      scale: 1.5,
       useCORS: true,
       letterRendering: true,
       logging: false,

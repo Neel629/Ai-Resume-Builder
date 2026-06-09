@@ -80,9 +80,9 @@ export default function PreviewPage() {
         } else {
           alert("Failed to email resume.");
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("PDF export/email failed:", error);
-        alert("An error occurred while emailing the resume.");
+        alert(`An error occurred while emailing the resume: ${error?.message || error}`);
       } finally {
         setIsEmailing(false);
       }
