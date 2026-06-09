@@ -41,16 +41,19 @@ export default function PreviewPage() {
     achievements,
   };
 
-  const handleExport = async () => {
+  const handleExport = () => {
     setIsExporting(true);
-    try {
-      const filename = personalInfo.fullName || "resume";
-      await exportToPDF("resume-preview", filename);
-    } catch (error) {
-      console.error("PDF export failed:", error);
-    } finally {
-      setIsExporting(false);
-    }
+    // Defer the heavy PDF export task to let the browser render the spinner smoothly first
+    setTimeout(async () => {
+      try {
+        const filename = personalInfo.fullName || "resume";
+        await exportToPDF("resume-preview", filename);
+      } catch (error) {
+        console.error("PDF export failed:", error);
+      } finally {
+        setIsExporting(false);
+      }
+    }, 150);
   };
 
   return (

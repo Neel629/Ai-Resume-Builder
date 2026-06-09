@@ -20,6 +20,9 @@ export async function exportToPDF(elementId: string, filename: string) {
   
   document.body.appendChild(printElement);
 
+  // Wait 200ms to ensure all cloned images/fonts/layouts have settled in the DOM
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
   const opt = {
     margin: 0,
     filename: `${filename.replace(/[^a-zA-Z0-9]/g, "_")}_resume.pdf`,
