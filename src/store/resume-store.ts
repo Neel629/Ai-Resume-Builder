@@ -9,6 +9,12 @@ import type {
   TemplateType,
 } from "@/lib/schemas";
 
+export interface CustomColors {
+  primary: string;
+  secondary: string;
+  font: string;
+}
+
 interface ResumeState {
   // Data
   resumeId: string | null;
@@ -20,6 +26,7 @@ interface ResumeState {
   achievements: Achievements;
   selectedTemplate: TemplateType;
   photoUrl: string | null;
+  customColors: CustomColors;
 
   // UI State
   currentStep: number;
@@ -57,6 +64,7 @@ interface ResumeState {
   setCurrentStep: (step: number) => void;
   setPhotoUrl: (url: string | null) => void;
   setResumeId: (id: string | null) => void;
+  setCustomColors: (colors: Partial<CustomColors>) => void;
   setIsSaving: (saving: boolean) => void;
 
   // Actions — Hydration & Reset
@@ -88,6 +96,12 @@ const initialAchievements: Achievements = {
   volunteering: "",
 };
 
+const initialCustomColors: CustomColors = {
+  primary: "#16A34A",
+  secondary: "#0A0A0A",
+  font: "#1a1a1a",
+};
+
 export const useResumeStore = create<ResumeState>((set) => ({
   // Initial State
   resumeId: null,
@@ -99,6 +113,7 @@ export const useResumeStore = create<ResumeState>((set) => ({
   achievements: { ...initialAchievements },
   selectedTemplate: "classic",
   photoUrl: null,
+  customColors: { ...initialCustomColors },
   currentStep: 1,
   isSaving: false,
   isDirty: false,
@@ -203,6 +218,10 @@ export const useResumeStore = create<ResumeState>((set) => ({
   setPhotoUrl: (url) => set({ photoUrl: url, isDirty: true }),
   setResumeId: (id) => set({ resumeId: id }),
   setIsSaving: (saving) => set({ isSaving: saving }),
+  setCustomColors: (colors) =>
+    set((state) => ({
+      customColors: { ...state.customColors, ...colors },
+    })),
 
   // Hydration & Reset
   hydrateFromDB: (data) =>
@@ -222,6 +241,7 @@ export const useResumeStore = create<ResumeState>((set) => ({
       achievements: { ...initialAchievements },
       selectedTemplate: "classic",
       photoUrl: null,
+      customColors: { ...initialCustomColors },
       currentStep: 1,
       isSaving: false,
       isDirty: false,

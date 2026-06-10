@@ -1,4 +1,5 @@
 import type { ResumeData, TemplateType } from "@/lib/schemas";
+import type { CustomColors } from "@/store/resume-store";
 import ClassicTemplate from "./classic";
 import ModernTemplate from "./modern";
 import ExecutiveTemplate from "./executive";
@@ -8,6 +9,7 @@ interface TemplateRendererProps {
   template: TemplateType;
   data: ResumeData;
   photoUrl?: string | null;
+  customColors?: CustomColors;
 }
 
 const templateMap = {
@@ -21,7 +23,22 @@ export default function TemplateRenderer({
   template,
   data,
   photoUrl,
+  customColors,
 }: TemplateRendererProps) {
   const Component = templateMap[template];
-  return <Component data={data} photoUrl={photoUrl} />;
+
+  // Inject custom colors as CSS custom properties on the wrapper
+  const colorVars = customColors
+    ? ({
+        "--resume-primary": customColors.primary,
+        "--resume-secondary": customColors.secondary,
+        "--resume-font": customColors.font,
+      } as React.CSSProperties)
+    : {};
+
+  return (
+    <div style={colorVars}>
+      <Component data={data} photoUrl={photoUrl} />
+    </div>
+  );
 }

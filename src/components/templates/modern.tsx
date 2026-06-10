@@ -10,10 +10,16 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
   const { personalInfo, education, experience, skills, projects, achievements } = data;
 
   return (
-    <div className="w-full bg-white text-[#1a1a1a] font-['Inter',sans-serif] text-[11px] leading-[1.5]">
+    <div
+      className="w-full bg-white font-['Inter',sans-serif] text-[11px] leading-[1.5]"
+      style={{ color: "var(--resume-font, #1a1a1a)" }}
+    >
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-[30%] bg-[#0A0A0A] text-white min-h-full p-5">
+        <div
+          className="w-[30%] text-white min-h-full p-5"
+          style={{ backgroundColor: "var(--resume-secondary, #0A0A0A)" }}
+        >
           {/* Photo */}
           {photoUrl && (
             <div className="mb-4">
@@ -28,43 +34,46 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
 
           {/* Contact */}
           <div className="mb-5">
-            <h2 className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#4ADE80] mb-2">
+            <h2
+              className="text-[9px] font-bold uppercase tracking-[0.2em] mb-2"
+              style={{ color: "var(--resume-primary, #4ADE80)" }}
+            >
               Contact
             </h2>
             <div className="space-y-1.5 text-[9.5px] text-white/70">
               {personalInfo.email && (
                 <div className="flex items-start gap-1.5">
-                  <Mail className="h-2.5 w-2.5 mt-0.5 text-[#4ADE80] shrink-0" />
+                  <Mail className="h-2.5 w-2.5 mt-0.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   <span className="break-all">{personalInfo.email}</span>
                 </div>
               )}
               {personalInfo.phone && (
                 <div className="flex items-center gap-1.5">
-                  <Phone className="h-2.5 w-2.5 text-[#4ADE80] shrink-0" />
+                  <Phone className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   {personalInfo.phone}
                 </div>
               )}
               {personalInfo.city && (
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="h-2.5 w-2.5 text-[#4ADE80] shrink-0" />
+                  <MapPin className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   {personalInfo.city}
                 </div>
               )}
               {personalInfo.Link2 && (
                 <div className="flex items-center gap-1.5">
-                  <Link2 className="h-2.5 w-2.5 text-[#4ADE80] shrink-0" />
+                  <Link2 className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   Link2
                 </div>
               )}
               {personalInfo.GitFork && (
                 <div className="flex items-center gap-1.5">
-                  <GitFork className="h-2.5 w-2.5 text-[#4ADE80] shrink-0" />
+                  <GitFork className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   GitFork
                 </div>
               )}
               {personalInfo.portfolio && (
                 <div className="flex items-center gap-1.5">
-                  <Globe className="h-2.5 w-2.5 text-[#4ADE80] shrink-0" />
+                  <Globe className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   Portfolio
                 </div>
               )}
@@ -74,7 +83,10 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
           {/* Skills */}
           {(skills.technical.length > 0 || skills.tools.length > 0 || skills.soft.length > 0) && (
             <div className="mb-5">
-              <h2 className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#4ADE80] mb-2">
+              <h2
+                className="text-[9px] font-bold uppercase tracking-[0.2em] mb-2"
+                style={{ color: "var(--resume-primary, #4ADE80)" }}
+              >
                 Skills
               </h2>
               {skills.technical.length > 0 && (
@@ -119,7 +131,10 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
           {/* Education in sidebar */}
           {education.length > 0 && (
             <div>
-              <h2 className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#4ADE80] mb-2">
+              <h2
+                className="text-[9px] font-bold uppercase tracking-[0.2em] mb-2"
+                style={{ color: "var(--resume-primary, #4ADE80)" }}
+              >
                 Education
               </h2>
               <div className="space-y-2">
@@ -142,7 +157,10 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
         <div className="flex-1 p-6 space-y-4">
           {/* Name */}
           <div className="mb-4">
-            <h1 className="text-2xl font-['DM_Sans',sans-serif] font-bold tracking-tight text-[#0A0A0A]">
+            <h1
+              className="text-2xl font-['DM_Sans',sans-serif] font-bold tracking-tight"
+              style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+            >
               {personalInfo.fullName || "Your Name"}
             </h1>
             {personalInfo.summary && (
@@ -155,8 +173,11 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
           {/* Experience */}
           {experience.length > 0 && (
             <section>
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0A0A0A] mb-2 flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
+              <h2
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 flex items-center gap-2"
+                style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+              >
+                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--resume-primary, #16A34A)" }} />
                 Experience
               </h2>
               <div className="space-y-3 border-l-2 border-[#E2E8F0] pl-4">
@@ -168,7 +189,7 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
                         {exp.startDate} — {exp.current ? "Present" : exp.endDate}
                       </span>
                     </div>
-                    <p className="text-[10px] text-[#16A34A] font-medium">{exp.company}</p>
+                    <p className="text-[10px] font-medium" style={{ color: "var(--resume-primary, #16A34A)" }}>{exp.company}</p>
                     <div className="mt-1 text-[10.5px] text-[#444] whitespace-pre-line">
                       {exp.responsibilities}
                     </div>
@@ -181,8 +202,11 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
           {/* Projects */}
           {projects.length > 0 && (
             <section>
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0A0A0A] mb-2 flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
+              <h2
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 flex items-center gap-2"
+                style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+              >
+                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--resume-primary, #16A34A)" }} />
                 Projects
               </h2>
               <div className="space-y-2.5">
@@ -190,11 +214,11 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
                   <div key={proj.id}>
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold text-[11px]">{proj.name}</h3>
-                      {proj.liveLink && <ExternalLink className="h-2.5 w-2.5 text-[#16A34A]" />}
+                      {proj.liveLink && <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />}
                       {proj.githubLink && <GitFork className="h-2.5 w-2.5 text-[#888]" />}
                     </div>
                     {proj.techStack && (
-                      <p className="text-[9px] text-[#16A34A] font-medium">{proj.techStack}</p>
+                      <p className="text-[9px] font-medium" style={{ color: "var(--resume-primary, #16A34A)" }}>{proj.techStack}</p>
                     )}
                     <p className="text-[10.5px] text-[#444] mt-0.5">{proj.description}</p>
                   </div>
@@ -206,8 +230,11 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
           {/* Achievements */}
           {(achievements.certifications || achievements.awards || achievements.extraCurriculars || achievements.volunteering) && (
             <section>
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0A0A0A] mb-2 flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
+              <h2
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 flex items-center gap-2"
+                style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+              >
+                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--resume-primary, #16A34A)" }} />
                 Achievements
               </h2>
               <div className="space-y-1 text-[10.5px] text-[#444] whitespace-pre-line">

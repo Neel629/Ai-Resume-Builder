@@ -10,46 +10,55 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
   const { personalInfo, education, experience, skills, projects, achievements } = data;
 
   return (
-    <div className="w-full bg-white text-[#1a1a1a] font-['Inter',sans-serif] text-[11px] leading-[1.5]">
+    <div
+      className="w-full bg-white font-['Inter',sans-serif] text-[11px] leading-[1.5]"
+      style={{ color: "var(--resume-font, #1a1a1a)" }}
+    >
       {/* Top Name Bar */}
-      <div className="px-8 pt-6 pb-4 border-b-2 border-[#16A34A]">
-        <h1 className="text-2xl font-['DM_Sans',sans-serif] font-bold tracking-tight text-center text-[#0A0A0A]">
+      <div
+        className="px-8 pt-6 pb-4 border-b-2"
+        style={{ borderColor: "var(--resume-primary, #16A34A)" }}
+      >
+        <h1
+          className="text-2xl font-['DM_Sans',sans-serif] font-bold tracking-tight text-center"
+          style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+        >
           {personalInfo.fullName || "Your Name"}
         </h1>
         <div className="flex flex-wrap justify-center items-center gap-3 mt-2 text-[9.5px] text-[#666]">
           {personalInfo.email && (
             <span className="flex items-center gap-1">
-              <Mail className="h-2.5 w-2.5 text-[#16A34A]" />
+              <Mail className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               {personalInfo.email}
             </span>
           )}
           {personalInfo.phone && (
             <span className="flex items-center gap-1">
-              <Phone className="h-2.5 w-2.5 text-[#16A34A]" />
+              <Phone className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               {personalInfo.phone}
             </span>
           )}
           {personalInfo.city && (
             <span className="flex items-center gap-1">
-              <MapPin className="h-2.5 w-2.5 text-[#16A34A]" />
+              <MapPin className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               {personalInfo.city}
             </span>
           )}
           {personalInfo.Link2 && (
             <span className="flex items-center gap-1">
-              <Link2 className="h-2.5 w-2.5 text-[#16A34A]" />
+              <Link2 className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               Link2
             </span>
           )}
           {personalInfo.GitFork && (
             <span className="flex items-center gap-1">
-              <GitFork className="h-2.5 w-2.5 text-[#16A34A]" />
+              <GitFork className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               GitFork
             </span>
           )}
           {personalInfo.portfolio && (
             <span className="flex items-center gap-1">
-              <Globe className="h-2.5 w-2.5 text-[#16A34A]" />
+              <Globe className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               Portfolio
             </span>
           )}
@@ -62,7 +71,10 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
           {/* Summary */}
           {personalInfo.summary && (
             <section>
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] mb-1.5">
+              <h2
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-1.5"
+                style={{ color: "var(--resume-primary, #16A34A)" }}
+              >
                 Professional Summary
               </h2>
               <p className="text-[10.5px] text-[#444] leading-relaxed">
@@ -74,7 +86,10 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
           {/* Experience */}
           {experience.length > 0 && (
             <section>
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] mb-2">
+              <h2
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2"
+                style={{ color: "var(--resume-primary, #16A34A)" }}
+              >
                 Professional Experience
               </h2>
               <div className="space-y-3">
@@ -86,7 +101,7 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
                         {exp.startDate} — {exp.current ? "Present" : exp.endDate}
                       </span>
                     </div>
-                    <p className="text-[10px] text-[#16A34A] font-semibold italic">
+                    <p className="text-[10px] font-semibold italic" style={{ color: "var(--resume-primary, #16A34A)" }}>
                       {exp.company}
                     </p>
                     <div className="mt-1 text-[10.5px] text-[#444] whitespace-pre-line">
@@ -101,7 +116,10 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
           {/* Projects */}
           {projects.length > 0 && (
             <section>
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] mb-2">
+              <h2
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2"
+                style={{ color: "var(--resume-primary, #16A34A)" }}
+              >
                 Key Projects
               </h2>
               <div className="space-y-2.5">
@@ -109,7 +127,7 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
                   <div key={proj.id}>
                     <div className="flex items-center gap-2">
                       <h3 className="font-bold text-[11px]">{proj.name}</h3>
-                      {proj.liveLink && <ExternalLink className="h-2.5 w-2.5 text-[#16A34A]" />}
+                      {proj.liveLink && <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />}
                       {proj.githubLink && <GitFork className="h-2.5 w-2.5 text-[#888]" />}
                     </div>
                     {proj.techStack && (
@@ -140,7 +158,10 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
           {/* Education */}
           {education.length > 0 && (
             <div>
-              <h2 className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#16A34A] mb-2">
+              <h2
+                className="text-[9px] font-bold uppercase tracking-[0.2em] mb-2"
+                style={{ color: "var(--resume-primary, #16A34A)" }}
+              >
                 Education
               </h2>
               <div className="space-y-2">
@@ -161,7 +182,10 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
           {/* Skills */}
           {(skills.technical.length > 0 || skills.tools.length > 0 || skills.soft.length > 0) && (
             <div>
-              <h2 className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#16A34A] mb-2">
+              <h2
+                className="text-[9px] font-bold uppercase tracking-[0.2em] mb-2"
+                style={{ color: "var(--resume-primary, #16A34A)" }}
+              >
                 Skills
               </h2>
               <div className="space-y-2">
@@ -170,7 +194,11 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
                     <p className="text-[8px] uppercase tracking-wider text-[#888] mb-1">Technical</p>
                     <div className="flex flex-wrap gap-1">
                       {skills.technical.map((s) => (
-                        <span key={s} className="px-1.5 py-0.5 text-[8px] rounded bg-[#16A34A]/10 text-[#16A34A] font-medium">
+                        <span
+                          key={s}
+                          className="px-1.5 py-0.5 text-[8px] rounded font-medium"
+                          style={{ backgroundColor: "color-mix(in srgb, var(--resume-primary, #16A34A) 10%, transparent)", color: "var(--resume-primary, #16A34A)" }}
+                        >
                           {s}
                         </span>
                       ))}
@@ -202,7 +230,10 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
           {/* Achievements */}
           {(achievements.certifications || achievements.awards) && (
             <div>
-              <h2 className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#16A34A] mb-2">
+              <h2
+                className="text-[9px] font-bold uppercase tracking-[0.2em] mb-2"
+                style={{ color: "var(--resume-primary, #16A34A)" }}
+              >
                 Achievements
               </h2>
               <div className="text-[9.5px] text-[#444] space-y-1 whitespace-pre-line">

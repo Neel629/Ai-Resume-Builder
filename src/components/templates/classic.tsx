@@ -10,16 +10,23 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
   const { personalInfo, education, experience, skills, projects, achievements } = data;
 
   return (
-    <div className="w-full bg-white text-[#1a1a1a] font-['Inter',sans-serif] text-[11px] leading-[1.5]">
+    <div
+      className="w-full bg-white font-['Inter',sans-serif] text-[11px] leading-[1.5]"
+      style={{ color: "var(--resume-font, #1a1a1a)" }}
+    >
       {/* Header */}
-      <div className="bg-[#0A0A0A] text-white px-8 py-6">
+      <div
+        className="text-white px-8 py-6"
+        style={{ backgroundColor: "var(--resume-secondary, #0A0A0A)" }}
+      >
         <div className="flex items-center gap-5">
           {photoUrl && (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={photoUrl}
               alt={personalInfo.fullName}
-              className="h-16 w-16 rounded-full object-cover border-2 border-[#16A34A]"
+              className="h-16 w-16 rounded-full object-cover border-2"
+              style={{ borderColor: "var(--resume-primary, #16A34A)" }}
             />
           )}
           <div>
@@ -46,7 +53,7 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
                 </span>
               )}
             </div>
-            <div className="flex flex-wrap items-center gap-3 mt-1 text-[10px] text-[#4ADE80]">
+            <div className="flex flex-wrap items-center gap-3 mt-1 text-[10px]" style={{ color: "var(--resume-primary, #4ADE80)" }}>
               {personalInfo.Link2 && (
                 <span className="flex items-center gap-1">
                   <Link2 className="h-2.5 w-2.5" />
@@ -74,7 +81,10 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
         {/* Summary */}
         {personalInfo.summary && (
           <section>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] border-b border-[#16A34A]/20 pb-1 mb-2">
+            <h2
+              className="text-[10px] font-bold uppercase tracking-[0.15em] pb-1 mb-2"
+              style={{ color: "var(--resume-primary, #16A34A)", borderBottom: "1px solid color-mix(in srgb, var(--resume-primary, #16A34A) 20%, transparent)" }}
+            >
               Summary
             </h2>
             <p className="text-[10.5px] text-[#444]">{personalInfo.summary}</p>
@@ -84,7 +94,10 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
         {/* Experience */}
         {experience.length > 0 && (
           <section>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] border-b border-[#16A34A]/20 pb-1 mb-2">
+            <h2
+              className="text-[10px] font-bold uppercase tracking-[0.15em] pb-1 mb-2"
+              style={{ color: "var(--resume-primary, #16A34A)", borderBottom: "1px solid color-mix(in srgb, var(--resume-primary, #16A34A) 20%, transparent)" }}
+            >
               Experience
             </h2>
             <div className="space-y-3">
@@ -96,7 +109,7 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
                       {exp.startDate} — {exp.current ? "Present" : exp.endDate}
                     </span>
                   </div>
-                  <p className="text-[10px] text-[#16A34A] font-medium">{exp.company}</p>
+                  <p className="text-[10px] font-medium" style={{ color: "var(--resume-primary, #16A34A)" }}>{exp.company}</p>
                   <div className="mt-1 text-[10.5px] text-[#444] whitespace-pre-line">
                     {exp.responsibilities}
                   </div>
@@ -109,7 +122,10 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
         {/* Education */}
         {education.length > 0 && (
           <section>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] border-b border-[#16A34A]/20 pb-1 mb-2">
+            <h2
+              className="text-[10px] font-bold uppercase tracking-[0.15em] pb-1 mb-2"
+              style={{ color: "var(--resume-primary, #16A34A)", borderBottom: "1px solid color-mix(in srgb, var(--resume-primary, #16A34A) 20%, transparent)" }}
+            >
               Education
             </h2>
             <div className="space-y-2">
@@ -121,7 +137,7 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
                       {edu.startYear} — {edu.endYear || "Present"}
                     </span>
                   </div>
-                  <p className="text-[10px] text-[#16A34A] font-medium">{edu.university}</p>
+                  <p className="text-[10px] font-medium" style={{ color: "var(--resume-primary, #16A34A)" }}>{edu.university}</p>
                   {edu.cgpa && (
                     <p className="text-[10px] text-[#666]">GPA: {edu.cgpa}</p>
                   )}
@@ -139,7 +155,10 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
         {/* Skills */}
         {(skills.technical.length > 0 || skills.tools.length > 0 || skills.soft.length > 0) && (
           <section>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] border-b border-[#16A34A]/20 pb-1 mb-2">
+            <h2
+              className="text-[10px] font-bold uppercase tracking-[0.15em] pb-1 mb-2"
+              style={{ color: "var(--resume-primary, #16A34A)", borderBottom: "1px solid color-mix(in srgb, var(--resume-primary, #16A34A) 20%, transparent)" }}
+            >
               Skills
             </h2>
             <div className="space-y-1">
@@ -168,7 +187,10 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
         {/* Projects */}
         {projects.length > 0 && (
           <section>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] border-b border-[#16A34A]/20 pb-1 mb-2">
+            <h2
+              className="text-[10px] font-bold uppercase tracking-[0.15em] pb-1 mb-2"
+              style={{ color: "var(--resume-primary, #16A34A)", borderBottom: "1px solid color-mix(in srgb, var(--resume-primary, #16A34A) 20%, transparent)" }}
+            >
               Projects
             </h2>
             <div className="space-y-2.5">
@@ -177,14 +199,14 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
                   <div className="flex items-center gap-2">
                     <h3 className="font-semibold text-[11px]">{proj.name}</h3>
                     {proj.liveLink && (
-                      <ExternalLink className="h-2.5 w-2.5 text-[#16A34A]" />
+                      <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
                     )}
                     {proj.githubLink && (
                       <GitFork className="h-2.5 w-2.5 text-[#888]" />
                     )}
                   </div>
                   {proj.techStack && (
-                    <p className="text-[9px] text-[#16A34A] font-medium">{proj.techStack}</p>
+                    <p className="text-[9px] font-medium" style={{ color: "var(--resume-primary, #16A34A)" }}>{proj.techStack}</p>
                   )}
                   <p className="text-[10.5px] text-[#444] mt-0.5">{proj.description}</p>
                 </div>
@@ -196,31 +218,34 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
         {/* Achievements */}
         {(achievements.certifications || achievements.awards || achievements.extraCurriculars || achievements.volunteering) && (
           <section>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#16A34A] border-b border-[#16A34A]/20 pb-1 mb-2">
+            <h2
+              className="text-[10px] font-bold uppercase tracking-[0.15em] pb-1 mb-2"
+              style={{ color: "var(--resume-primary, #16A34A)", borderBottom: "1px solid color-mix(in srgb, var(--resume-primary, #16A34A) 20%, transparent)" }}
+            >
               Achievements
             </h2>
             <div className="space-y-1.5 text-[10.5px] text-[#444] whitespace-pre-line">
               {achievements.certifications && (
                 <div>
-                  <span className="font-semibold text-[#1a1a1a]">Certifications: </span>
+                  <span className="font-semibold" style={{ color: "var(--resume-font, #1a1a1a)" }}>Certifications: </span>
                   {achievements.certifications}
                 </div>
               )}
               {achievements.awards && (
                 <div>
-                  <span className="font-semibold text-[#1a1a1a]">Awards: </span>
+                  <span className="font-semibold" style={{ color: "var(--resume-font, #1a1a1a)" }}>Awards: </span>
                   {achievements.awards}
                 </div>
               )}
               {achievements.extraCurriculars && (
                 <div>
-                  <span className="font-semibold text-[#1a1a1a]">Activities: </span>
+                  <span className="font-semibold" style={{ color: "var(--resume-font, #1a1a1a)" }}>Activities: </span>
                   {achievements.extraCurriculars}
                 </div>
               )}
               {achievements.volunteering && (
                 <div>
-                  <span className="font-semibold text-[#1a1a1a]">Volunteering: </span>
+                  <span className="font-semibold" style={{ color: "var(--resume-font, #1a1a1a)" }}>Volunteering: </span>
                   {achievements.volunteering}
                 </div>
               )}

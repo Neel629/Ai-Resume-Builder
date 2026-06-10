@@ -10,9 +10,17 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
   const { personalInfo, education, experience, skills, projects, achievements } = data;
 
   return (
-    <div className="w-full bg-white text-[#1a1a1a] font-['Inter',sans-serif] text-[11px] leading-[1.5]">
+    <div
+      className="w-full bg-white font-['Inter',sans-serif] text-[11px] leading-[1.5]"
+      style={{ color: "var(--resume-font, #1a1a1a)" }}
+    >
       {/* Gradient Header */}
-      <div className="bg-gradient-to-r from-[#0A0A0A] via-[#15803d] to-[#16A34A] text-white px-8 py-7">
+      <div
+        className="text-white px-8 py-7"
+        style={{
+          background: `linear-gradient(to right, var(--resume-secondary, #0A0A0A), var(--resume-primary, #16A34A))`,
+        }}
+      >
         <div className="flex items-center gap-5">
           {photoUrl && (
             /* eslint-disable-next-line @next/next/no-img-element */
@@ -80,7 +88,12 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
             {[...skills.technical, ...skills.tools].map((s) => (
               <span
                 key={s}
-                className="px-2 py-0.5 text-[8px] font-medium rounded-full bg-[#16A34A]/10 text-[#16A34A] border border-[#16A34A]/20"
+                className="px-2 py-0.5 text-[8px] font-medium rounded-full border"
+                style={{
+                  backgroundColor: "color-mix(in srgb, var(--resume-primary, #16A34A) 10%, transparent)",
+                  color: "var(--resume-primary, #16A34A)",
+                  borderColor: "color-mix(in srgb, var(--resume-primary, #16A34A) 20%, transparent)",
+                }}
               >
                 {s}
               </span>
@@ -101,20 +114,30 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
         {/* Experience */}
         {experience.length > 0 && (
           <section>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0A0A0A] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2">
-              <span className="h-4 w-1 rounded-full bg-gradient-to-b from-[#16A34A] to-[#4ADE80]" />
+            <h2
+              className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2"
+              style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+            >
+              <span
+                className="h-4 w-1 rounded-full"
+                style={{ background: `linear-gradient(to bottom, var(--resume-primary, #16A34A), color-mix(in srgb, var(--resume-primary, #16A34A) 60%, white))` }}
+              />
               Experience
             </h2>
             <div className="space-y-3">
               {experience.map((exp) => (
-                <div key={exp.id} className="pl-3 border-l-2 border-[#4ADE80]/30">
+                <div
+                  key={exp.id}
+                  className="pl-3 border-l-2"
+                  style={{ borderColor: "color-mix(in srgb, var(--resume-primary, #16A34A) 30%, transparent)" }}
+                >
                   <div className="flex justify-between items-baseline">
-                    <h3 className="font-bold text-[11px] text-[#0A0A0A]">{exp.role}</h3>
+                    <h3 className="font-bold text-[11px]" style={{ color: "var(--resume-secondary, #0A0A0A)" }}>{exp.role}</h3>
                     <span className="text-[9px] text-[#888] shrink-0 ml-2">
                       {exp.startDate} — {exp.current ? "Present" : exp.endDate}
                     </span>
                   </div>
-                  <p className="text-[10px] text-[#16A34A] font-semibold">{exp.company}</p>
+                  <p className="text-[10px] font-semibold" style={{ color: "var(--resume-primary, #16A34A)" }}>{exp.company}</p>
                   <div className="mt-1 text-[10.5px] text-[#444] whitespace-pre-line">
                     {exp.responsibilities}
                   </div>
@@ -128,8 +151,14 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
           {/* Projects */}
           {projects.length > 0 && (
             <section>
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0A0A0A] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2">
-                <span className="h-4 w-1 rounded-full bg-gradient-to-b from-[#16A34A] to-[#4ADE80]" />
+              <h2
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2"
+                style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+              >
+                <span
+                  className="h-4 w-1 rounded-full"
+                  style={{ background: `linear-gradient(to bottom, var(--resume-primary, #16A34A), color-mix(in srgb, var(--resume-primary, #16A34A) 60%, white))` }}
+                />
                 Projects
               </h2>
               <div className="space-y-2.5">
@@ -137,11 +166,11 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
                   <div key={proj.id}>
                     <div className="flex items-center gap-1.5">
                       <h3 className="font-semibold text-[10.5px]">{proj.name}</h3>
-                      {proj.liveLink && <ExternalLink className="h-2 w-2 text-[#16A34A]" />}
+                      {proj.liveLink && <ExternalLink className="h-2 w-2" style={{ color: "var(--resume-primary, #16A34A)" }} />}
                       {proj.githubLink && <GitFork className="h-2 w-2 text-[#888]" />}
                     </div>
                     {proj.techStack && (
-                      <p className="text-[8px] text-[#16A34A]">{proj.techStack}</p>
+                      <p className="text-[8px]" style={{ color: "var(--resume-primary, #16A34A)" }}>{proj.techStack}</p>
                     )}
                     <p className="text-[10px] text-[#444] mt-0.5">{proj.description}</p>
                   </div>
@@ -154,15 +183,21 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
           <div className="space-y-4">
             {education.length > 0 && (
               <section>
-                <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0A0A0A] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-gradient-to-b from-[#16A34A] to-[#4ADE80]" />
+                <h2
+                  className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2"
+                  style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+                >
+                  <span
+                    className="h-4 w-1 rounded-full"
+                    style={{ background: `linear-gradient(to bottom, var(--resume-primary, #16A34A), color-mix(in srgb, var(--resume-primary, #16A34A) 60%, white))` }}
+                  />
                   Education
                 </h2>
                 <div className="space-y-2">
                   {education.map((edu) => (
                     <div key={edu.id}>
                       <p className="font-semibold text-[10.5px]">{edu.degree}</p>
-                      <p className="text-[9px] text-[#16A34A] font-medium">{edu.university}</p>
+                      <p className="text-[9px] font-medium" style={{ color: "var(--resume-primary, #16A34A)" }}>{edu.university}</p>
                       <p className="text-[8px] text-[#888]">
                         {edu.startYear} — {edu.endYear || "Present"}
                         {edu.cgpa ? ` · GPA: ${edu.cgpa}` : ""}
@@ -175,8 +210,14 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
 
             {(achievements.certifications || achievements.awards || achievements.extraCurriculars || achievements.volunteering) && (
               <section>
-                <h2 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#0A0A0A] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-gradient-to-b from-[#16A34A] to-[#4ADE80]" />
+                <h2
+                  className="text-[10px] font-bold uppercase tracking-[0.15em] mb-2 pb-1 border-b border-[#E2E8F0] flex items-center gap-2"
+                  style={{ color: "var(--resume-secondary, #0A0A0A)" }}
+                >
+                  <span
+                    className="h-4 w-1 rounded-full"
+                    style={{ background: `linear-gradient(to bottom, var(--resume-primary, #16A34A), color-mix(in srgb, var(--resume-primary, #16A34A) 60%, white))` }}
+                  />
                   Achievements
                 </h2>
                 <div className="text-[10px] text-[#444] space-y-1 whitespace-pre-line">
