@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/store/resume-store";
 import Navbar from "@/components/navbar";
 import TemplateRenderer from "@/components/templates/template-renderer";
-import { exportToPDF, exportToPDFBase64 } from "@/lib/pdf-export";
-import { Download, ArrowLeft, Check, Loader2, Mail, Palette, RotateCcw } from "lucide-react";
+import { exportToPDF } from "@/lib/pdf-export";
+import { Download, ArrowLeft, Check, Loader2, Palette, RotateCcw } from "lucide-react";
 import type { TemplateType, ResumeData } from "@/lib/schemas";
 
 const templates: { key: TemplateType; name: string; description: string }[] = [
@@ -42,7 +42,6 @@ export default function PreviewPage() {
   } = useResumeStore();
 
   const [isExporting, setIsExporting] = useState(false);
-  const [isEmailing, setIsEmailing] = useState(false);
   const [showColorPanel, setShowColorPanel] = useState(false);
 
   const resumeData: ResumeData = {
@@ -64,38 +63,6 @@ export default function PreviewPage() {
         console.error("PDF export failed:", error);
       } finally {
         setIsExporting(false);
-      }
-    }, 150);
-  };
-
-  const handleEmail = () => {
-    if (!personalInfo.email) {
-      alert("Please add your email in the Personal Info section first.");
-      return;
-    }
-    
-    setIsEmailing(true);
-    setTimeout(async () => {
-      try {
-        const filename = personalInfo.fullName || "resume";
-        const pdfBase64 = await exportToPDFBase64("resume-preview");
-        
-        const response = await fetch("/api/send-resume", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: personalInfo.email, pdfBase64, filename }),
-        });
-
-        if (response.ok) {
-          alert(`Resume emailed successfully to ${personalInfo.email}!`);
-        } else {
-          alert("Failed to email resume.");
-        }
-      } catch (error: any) {
-        console.error("PDF export/email failed:", error);
-        alert(`An error occurred while emailing the resume: ${error?.message || error}`);
-      } finally {
-        setIsEmailing(false);
       }
     }, 150);
   };
@@ -142,21 +109,8 @@ export default function PreviewPage() {
               </button>
 
               <button
-                onClick={handleEmail}
-                disabled={isEmailing || isExporting}
-                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-emerald border border-emerald font-medium hover:bg-emerald/5 transition-all shadow-sm disabled:opacity-50 text-sm"
-              >
-                {isEmailing ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Mail className="h-4 w-4" />
-                )}
-                Email to Me
-              </button>
-
-              <button
                 onClick={handleExport}
-                disabled={isExporting || isEmailing}
+                disabled={isExporting}
                 className="flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald text-white font-medium hover:bg-emerald-dark transition-all shadow-lg shadow-emerald/20 disabled:opacity-50 text-sm"
               >
                 {isExporting ? (
