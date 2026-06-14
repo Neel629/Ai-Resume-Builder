@@ -35,16 +35,22 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
             </h1>
             <div className="flex flex-wrap items-center gap-3 mt-1.5 text-[10px] text-white/70">
               {personalInfo.email && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Mail className="h-2.5 w-2.5" />
                   {personalInfo.email}
-                </span>
+                </a>
               )}
               {personalInfo.phone && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={`tel:${personalInfo.phone}`}
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Phone className="h-2.5 w-2.5" />
                   {personalInfo.phone}
-                </span>
+                </a>
               )}
               {personalInfo.city && (
                 <span className="flex items-center gap-1">
@@ -55,22 +61,37 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
             </div>
             <div className="flex flex-wrap items-center gap-3 mt-1 text-[10px]" style={{ color: "var(--resume-primary, #4ADE80)" }}>
               {personalInfo.Link2 && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={personalInfo.Link2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Link2 className="h-2.5 w-2.5" />
                   Link2
-                </span>
+                </a>
               )}
               {personalInfo.GitFork && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={personalInfo.GitFork}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <GitFork className="h-2.5 w-2.5" />
                   GitFork
-                </span>
+                </a>
               )}
               {personalInfo.portfolio && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={personalInfo.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Globe className="h-2.5 w-2.5" />
                   Portfolio
-                </span>
+                </a>
               )}
             </div>
           </div>
@@ -199,10 +220,24 @@ export default function ClassicTemplate({ data, photoUrl }: TemplateProps) {
                   <div className="flex items-center gap-2">
                     <h3 className="font-semibold text-[11px]">{proj.name}</h3>
                     {proj.liveLink && (
-                      <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
+                      <a
+                        href={proj.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-inherit hover:opacity-80 flex items-center"
+                      >
+                        <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
+                      </a>
                     )}
                     {proj.githubLink && (
-                      <GitFork className="h-2.5 w-2.5 text-[#888]" />
+                      <a
+                        href={proj.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-inherit hover:opacity-80 flex items-center"
+                      >
+                        <GitFork className="h-2.5 w-2.5 text-[#888]" />
+                      </a>
                     )}
                   </div>
                   {proj.techStack && (

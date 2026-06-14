@@ -41,16 +41,22 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
             )}
             <div className="flex flex-wrap items-center gap-3 mt-2 text-[9.5px] text-white/60">
               {personalInfo.email && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Mail className="h-2.5 w-2.5" />
                   {personalInfo.email}
-                </span>
+                </a>
               )}
               {personalInfo.phone && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={`tel:${personalInfo.phone}`}
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Phone className="h-2.5 w-2.5" />
                   {personalInfo.phone}
-                </span>
+                </a>
               )}
               {personalInfo.city && (
                 <span className="flex items-center gap-1">
@@ -59,22 +65,37 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
                 </span>
               )}
               {personalInfo.Link2 && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={personalInfo.Link2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Link2 className="h-2.5 w-2.5" />
                   Link2
-                </span>
+                </a>
               )}
               {personalInfo.GitFork && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={personalInfo.GitFork}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <GitFork className="h-2.5 w-2.5" />
                   GitFork
-                </span>
+                </a>
               )}
               {personalInfo.portfolio && (
-                <span className="flex items-center gap-1">
+                <a
+                  href={personalInfo.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-inherit no-underline hover:underline"
+                >
                   <Globe className="h-2.5 w-2.5" />
                   Portfolio
-                </span>
+                </a>
               )}
             </div>
           </div>
@@ -166,8 +187,26 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
                   <div key={proj.id}>
                     <div className="flex items-center gap-1.5">
                       <h3 className="font-semibold text-[10.5px]">{proj.name}</h3>
-                      {proj.liveLink && <ExternalLink className="h-2 w-2" style={{ color: "var(--resume-primary, #16A34A)" }} />}
-                      {proj.githubLink && <GitFork className="h-2 w-2 text-[#888]" />}
+                      {proj.liveLink && (
+                        <a
+                          href={proj.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-inherit hover:opacity-80 flex items-center"
+                        >
+                          <ExternalLink className="h-2 w-2" style={{ color: "var(--resume-primary, #16A34A)" }} />
+                        </a>
+                      )}
+                      {proj.githubLink && (
+                        <a
+                          href={proj.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-inherit hover:opacity-80 flex items-center"
+                        >
+                          <GitFork className="h-2 w-2 text-[#888]" />
+                        </a>
+                      )}
                     </div>
                     {proj.techStack && (
                       <p className="text-[8px]" style={{ color: "var(--resume-primary, #16A34A)" }}>{proj.techStack}</p>

@@ -27,16 +27,22 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
         </h1>
         <div className="flex flex-wrap justify-center items-center gap-3 mt-2 text-[9.5px] text-[#666]">
           {personalInfo.email && (
-            <span className="flex items-center gap-1">
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="flex items-center gap-1 text-inherit no-underline hover:underline"
+            >
               <Mail className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               {personalInfo.email}
-            </span>
+            </a>
           )}
           {personalInfo.phone && (
-            <span className="flex items-center gap-1">
+            <a
+              href={`tel:${personalInfo.phone}`}
+              className="flex items-center gap-1 text-inherit no-underline hover:underline"
+            >
               <Phone className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               {personalInfo.phone}
-            </span>
+            </a>
           )}
           {personalInfo.city && (
             <span className="flex items-center gap-1">
@@ -45,22 +51,37 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
             </span>
           )}
           {personalInfo.Link2 && (
-            <span className="flex items-center gap-1">
+            <a
+              href={personalInfo.Link2}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-inherit no-underline hover:underline"
+            >
               <Link2 className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               Link2
-            </span>
+            </a>
           )}
           {personalInfo.GitFork && (
-            <span className="flex items-center gap-1">
+            <a
+              href={personalInfo.GitFork}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-inherit no-underline hover:underline"
+            >
               <GitFork className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               GitFork
-            </span>
+            </a>
           )}
           {personalInfo.portfolio && (
-            <span className="flex items-center gap-1">
+            <a
+              href={personalInfo.portfolio}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-inherit no-underline hover:underline"
+            >
               <Globe className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
               Portfolio
-            </span>
+            </a>
           )}
         </div>
       </div>
@@ -127,8 +148,26 @@ export default function ExecutiveTemplate({ data, photoUrl }: TemplateProps) {
                   <div key={proj.id}>
                     <div className="flex items-center gap-2">
                       <h3 className="font-bold text-[11px]">{proj.name}</h3>
-                      {proj.liveLink && <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />}
-                      {proj.githubLink && <GitFork className="h-2.5 w-2.5 text-[#888]" />}
+                      {proj.liveLink && (
+                        <a
+                          href={proj.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-inherit hover:opacity-80 flex items-center"
+                        >
+                          <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
+                        </a>
+                      )}
+                      {proj.githubLink && (
+                        <a
+                          href={proj.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-inherit hover:opacity-80 flex items-center"
+                        >
+                          <GitFork className="h-2.5 w-2.5 text-[#888]" />
+                        </a>
+                      )}
                     </div>
                     {proj.techStack && (
                       <p className="text-[9px] text-[#888] italic">{proj.techStack}</p>

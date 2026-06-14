@@ -42,16 +42,22 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
             </h2>
             <div className="space-y-1.5 text-[9.5px] text-white/70">
               {personalInfo.email && (
-                <div className="flex items-start gap-1.5">
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="flex items-start gap-1.5 text-inherit no-underline hover:underline"
+                >
                   <Mail className="h-2.5 w-2.5 mt-0.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   <span className="break-all">{personalInfo.email}</span>
-                </div>
+                </a>
               )}
               {personalInfo.phone && (
-                <div className="flex items-center gap-1.5">
+                <a
+                  href={`tel:${personalInfo.phone}`}
+                  className="flex items-center gap-1.5 text-inherit no-underline hover:underline"
+                >
                   <Phone className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   {personalInfo.phone}
-                </div>
+                </a>
               )}
               {personalInfo.city && (
                 <div className="flex items-center gap-1.5">
@@ -60,22 +66,37 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
                 </div>
               )}
               {personalInfo.Link2 && (
-                <div className="flex items-center gap-1.5">
+                <a
+                  href={personalInfo.Link2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-inherit no-underline hover:underline"
+                >
                   <Link2 className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   Link2
-                </div>
+                </a>
               )}
               {personalInfo.GitFork && (
-                <div className="flex items-center gap-1.5">
+                <a
+                  href={personalInfo.GitFork}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-inherit no-underline hover:underline"
+                >
                   <GitFork className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   GitFork
-                </div>
+                </a>
               )}
               {personalInfo.portfolio && (
-                <div className="flex items-center gap-1.5">
+                <a
+                  href={personalInfo.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-inherit no-underline hover:underline"
+                >
                   <Globe className="h-2.5 w-2.5 shrink-0" style={{ color: "var(--resume-primary, #4ADE80)" }} />
                   Portfolio
-                </div>
+                </a>
               )}
             </div>
           </div>
@@ -214,8 +235,26 @@ export default function ModernTemplate({ data, photoUrl }: TemplateProps) {
                   <div key={proj.id}>
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold text-[11px]">{proj.name}</h3>
-                      {proj.liveLink && <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />}
-                      {proj.githubLink && <GitFork className="h-2.5 w-2.5 text-[#888]" />}
+                      {proj.liveLink && (
+                        <a
+                          href={proj.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-inherit hover:opacity-80 flex items-center"
+                        >
+                          <ExternalLink className="h-2.5 w-2.5" style={{ color: "var(--resume-primary, #16A34A)" }} />
+                        </a>
+                      )}
+                      {proj.githubLink && (
+                        <a
+                          href={proj.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-inherit hover:opacity-80 flex items-center"
+                        >
+                          <GitFork className="h-2.5 w-2.5 text-[#888]" />
+                        </a>
+                      )}
                     </div>
                     {proj.techStack && (
                       <p className="text-[9px] font-medium" style={{ color: "var(--resume-primary, #16A34A)" }}>{proj.techStack}</p>
