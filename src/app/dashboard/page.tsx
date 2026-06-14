@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/navbar";
 import { useResumeStore } from "@/store/resume-store";
@@ -29,24 +29,32 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const { resetStore, hydrateFromDB, setResumeId } = useResumeStore();
-  const supabase = createClient();
+
+  // Memoize the Supabase client so it doesn't change on every render,
+  // which would cause fetchResumes to be recreated infinitely.
+  const supabase = useMemo(() => createClient(), []);
 
   const fetchResumes = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
-      .from("resumes")
-      .select("id, title, selected_template, updated_at, personal_info")
-      .order("updated_at", { ascending: false });
+    try {
+      const { data, error } = await supabase
+        .from("resumes")
+        .select("id, title, selected_template, updated_at, personal_info")
+        .order("updated_at", { ascending: false });
 
-    setResumes((data as ResumeRecord[]) || []);
-    setLoading(false);
+      if (error) {
+        console.error("Failed to fetch resumes:", error.message);
+      }
+      setResumes((data as ResumeRecord[]) || []);
+    } catch (err) {
+      console.error("Unexpected error fetching resumes:", err);
+    } finally {
+      setLoading(false);
+    }
   }, [supabase]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      fetchResumes();
-    }, 0);
-    return () => clearTimeout(timer);
+    fetchResumes();
   }, [fetchResumes]);
 
   const handleNewResume = () => {

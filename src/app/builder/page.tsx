@@ -12,7 +12,7 @@ import SkillsStep from "@/components/steps/skills";
 import ProjectsStep from "@/components/steps/projects";
 import AchievementsStep from "@/components/steps/achievements";
 import { createClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const stepComponents = [
   PersonalInfoStep,
@@ -43,7 +43,7 @@ export default function BuilderPage() {
   } = useResumeStore();
 
   const [userId, setUserId] = useState<string | null>(null);
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   useEffect(() => {
     const getUser = async () => {
@@ -53,7 +53,7 @@ export default function BuilderPage() {
       if (user) setUserId(user.id);
     };
     getUser();
-  }, [supabase.auth]);
+  }, [supabase]);
 
   const StepComponent = stepComponents[currentStep - 1];
 
